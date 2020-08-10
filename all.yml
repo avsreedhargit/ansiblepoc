@@ -1,0 +1,5 @@
+#Variables for playbooks
+httpd_port: 80
+screen_tab1_name: htop
+screen_tab2_name: tab2
+ops_user: exampleuser
