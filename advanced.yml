@@ -26,10 +26,10 @@
 
   - name: Check if already running
       shell: ps -ef | grep -v grep | grep htop
-    ignore_errors: true
-    register: htop_is_running
-    no_log: true
-    become: true
+      ignore_errors: true
+      register: htop_is_running
+      no_log: true
+      become: true
 
   - name: Remove dead screens
     shell: screen -wipe
