@@ -1,0 +1,33 @@
+---
+hosts: all
+tasks:
+  - name: Copying repo file
+    copy: src=/etc/yum.repos.d/rhel.repo dest=/etc/yum.repos.d/rhel.repo
+  - name: Installing wget Python
+    state: installed
+    with_items:
+       - WGET
+       - Python 
+  - name: Download lib 
+    get_url: url=http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm dest repo.mysql.com/mysql-community-release-el7-5.noarch.rpm
+  - name: Install rpm
+    yum: name=/usr/mysql/mysql-community-release-el7-5.noarch.rpm
+    state: present
+  - name: Update Package
+    yum: name=*
+    state: latest
+  - name: Install mySQL
+    yum: name=mysql-server
+    state: installed
+  - name: Start SQL Service
+    service: name=mysqld
+    state: restarted
+  - name: Create demo database
+    mysql_db: name=shree
+    state: present
+  - name: Create demo user
+    mysql_user: name=demo password=demo priv=demo host '%'
+    state: present
+  - name: Restart mySQL Service
+    service: name=mysql
+    state: restarted    
