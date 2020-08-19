@@ -1,0 +1,19 @@
+- hosts: all
+  become: true
+  tasks:
+    - name: Install WebSphere Application Server Liberty v8
+      ibmim:
+        name: com.ibm.websphere.liberty.v85
+        repositories:
+          - http://was-repos/
+
+    - name: Uninstall WebSphere Application Server Liberty v8
+      ibmim:
+        name: com.ibm.websphere.liberty.v85
+        state: absent
+
+    - name: Update all packages
+      ibmim:
+        state: latest
+        repositories:
+          - http://was-repos/
