@@ -1,0 +1,16 @@
+# Maintained by Ansible Playbook
+[Unit]
+Description=Apache Kafka - ZooKeeper
+Documentation=http://docs.confluent.io/
+After=network.target
+
+[Service]
+Type=simple
+User={{kafka_user}}
+Group={{kafka_group}}
+ExecStart=/usr/bin/zookeeper-server-start /etc/kafka/zookeeper.properties
+TimeoutStopSec=180
+Restart=no
+
+[Install]
+WantedBy=multi-user.target
